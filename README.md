@@ -7,22 +7,22 @@
 1) Компиляция серверов:
 Для каждого сервера выполните следующие команды в терминале:
 ""
-g++ -o AppRegistryServer AppRegistryServer.cpp $(pkg-config dbus-c++-1 --cflags --libs)
+g++ -o AppRegistry AppRegistry.cpp $(pkg-config dbus-c++-1 --cflags --libs)
 ""
 и
 ""
-g++ -o AppLauncherServer AppLauncherServer.cpp $(pkg-config dbus-c++-1 --cflags --libs)
+g++ -o AppLauncher AppLauncher.cpp $(pkg-config dbus-c++-1 --cflags --libs)
 ""
 Здесь AppRegistryServer.cpp и AppLauncherServer.cpp - это исходные коды для серверов AppRegistry и AppLauncher.
 
 2) Запуск серверов:
 Откройте два терминала и в каждом выполните соответствующую команду:
 ""
-./AppRegistryServer
+./AppRegistry
 ""
 и
 ""
-./AppLauncherServer
+./AppLauncher
 ""
 3) Компиляция и запуск клиента (основной программы):
 Для основной программы выполните следующие команды:
