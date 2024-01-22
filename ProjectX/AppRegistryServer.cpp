@@ -3,16 +3,15 @@
 #include <string>
 #include <dbus-c++/dbus.h>
 
-class AppRegistry : public DBus::ObjectProxy {
+class AppRegistry : public DBus::ObjectAdaptor {
 private:
     std::map<std::string, std::string> formatAppMap;
 
 public:
-    AppRegistry(DBus::Connection& connection)
-        : DBus::ObjectProxy(connection, "/org/example/AppRegistry", "org.example.AppRegistry") {}
+    AppRegistry(DBus::Connection &connection)
+        : DBus::ObjectAdaptor(connection, "/org/example/AppRegistry") {}
 
-    // Метод для регистрации формата и приложения
-    void RegisterFormat(const std::string& format, const std::string& appName) {
+    void RegisterFormat(const std::string &format, const std::string &appName) {
         formatAppMap[format] = appName;
         std::cout << "Registered: Format - " << format << ", App - " << appName << std::endl;
     }
@@ -22,10 +21,10 @@ int main() {
     DBus::default_dispatcher = &DBus::glib_integration;
     DBus::Connection conn = DBus::Connection::SessionBus();
 
-    // Регистрация сервера AppRegistry
+    // Р РµРіРёСЃС‚СЂР°С†РёСЏ СЃРµСЂРІРµСЂР° AppRegistry
     AppRegistry appRegistry(conn);
 
-    // Запуск цикла обработки событий D-Bus
+    // Р—Р°РїСѓСЃРє С†РёРєР»Р° РѕР±СЂР°Р±РѕС‚РєРё СЃРѕР±С‹С‚РёР№ D-Bus
     Glib::MainLoop loop;
     loop.run();
 
