@@ -12,8 +12,7 @@ public:
     AppRegistryClient()
         : conn(DBus::Connection::SessionBus()), appRegistryProxy(conn, "org.example.AppRegistry", "/org/example/AppRegistry") {}
 
-    // Метод для регистрации формата и приложения
-    void RegisterFormat(const std::string& format, const std::string& appName) {
+    void RegisterFormat(const std::string &format, const std::string &appName) {
         appRegistryProxy->RegisterFormat(format, appName);
     }
 };
@@ -28,8 +27,7 @@ public:
     AppLauncherClient()
         : conn(DBus::Connection::SessionBus()), appLauncherProxy(conn, "org.example.AppLauncher", "/org/example/AppLauncher") {}
 
-    // Метод для запуска приложения с файлом
-    void LaunchApp(const std::string& appName, const std::string& file) {
+    void LaunchApp(const std::string &appName, const std::string &file) {
         appLauncherProxy->LaunchApp(appName, file);
     }
 };
@@ -41,11 +39,11 @@ int main() {
 
     AppLauncherClient launcherClient;
     std::string format;
-    std::cout << "Введите формат файла: ";
+    std::cout << "Р’РІРµРґРёС‚Рµ С„РѕСЂРјР°С‚ С„Р°Р№Р»Р°: ";
     std::cin >> format;
 
     std::string selectedFile;
-    std::cout << "Введите имя файла: ";
+    std::cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ С„Р°Р№Р»Р°: ";
     std::cin >> selectedFile;
 
     std::string selectedApp = registryClient.GetAppForFormat(format);
