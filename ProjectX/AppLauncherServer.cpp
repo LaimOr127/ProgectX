@@ -3,13 +3,12 @@
 #include <string>
 #include <dbus-c++/dbus.h>
 
-class AppLauncher : public DBus::ObjectProxy {
+class AppLauncher : public DBus::ObjectAdaptor {
 public:
-    AppLauncher(DBus::Connection& connection)
-        : DBus::ObjectProxy(connection, "/org/example/AppLauncher", "org.example.AppLauncher") {}
+    AppLauncher(DBus::Connection &connection)
+        : DBus::ObjectAdaptor(connection, "/org/example/AppLauncher") {}
 
-    // Метод для запуска приложения с файлом
-    void LaunchApp(const std::string& appName, const std::string& file) {
+    void LaunchApp(const std::string &appName, const std::string &file) {
         std::cout << "Launching: " << appName << " with file: " << file << std::endl;
     }
 };
@@ -18,10 +17,10 @@ int main() {
     DBus::default_dispatcher = &DBus::glib_integration;
     DBus::Connection conn = DBus::Connection::SessionBus();
 
-    // Регистрация сервера AppLauncher
+    // Р РµРіРёСЃС‚СЂР°С†РёСЏ СЃРµСЂРІРµСЂР° AppLauncher
     AppLauncher appLauncher(conn);
 
-    // Запуск цикла обработки событий D-Bus
+    // Р—Р°РїСѓСЃРє С†РёРєР»Р° РѕР±СЂР°Р±РѕС‚РєРё СЃРѕР±С‹С‚РёР№ D-Bus
     Glib::MainLoop loop;
     loop.run();
 
